@@ -9,15 +9,9 @@
     <main class="main">
         <div class="main__block">
             <form action="{% url 'camanagement:add_cam' %}" method="post">
-                <div class="mb-3">
-                    <label for="rtsp_url_id" class="form-label">RTSP URL</label>
-                    <input type="text" class="form-control" id="rtsp_url_id" placeholder="RTSP URL">
-                </div>
-                <div class="mb-3">
-                    <label for="name_id" class="form-label">Camera's name</label>
-                    <input type="text" class="form-control" id="name_id" placeholder="Name">
-                </div>
-                <button class="btn btn-primary">Add</button>
+                {% csrf_token %}
+                {{ form }}
+                <button class="btn btn-primary" type="submit">Add</button>
             </form>
         </div>
     </main>

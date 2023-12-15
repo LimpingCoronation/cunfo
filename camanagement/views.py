@@ -28,7 +28,7 @@ def add_cam(request):
             cam.save()
             return HttpResponseRedirect(reverse('camanagement:add_cam'))
         else:
-            return render(request, 'camanagement/add_cam.html', context=context)
+            return render(request, 'camanagement/add_cam.html', context={'form': CameraForm()})
     else:
         context = {
             'form': CameraForm()

@@ -20,7 +20,7 @@ from common.ip_filter import ip_filter
 from camanagement.views import index
 
 urlpatterns = [
-    path('admin/', ip_filter(admin.site.urls)),
+    path('admin/', admin.site.urls),
     path('', ip_filter(index), name='index'),
     path('users/', include('users.urls', namespace='users')),
     path('manage/', include('camanagement.urls', namespace='camanagement')),
