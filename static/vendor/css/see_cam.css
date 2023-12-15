@@ -1,0 +1,19 @@
+.camera_block {
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    margin-top: 30px;
+    background-color: #99949475;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.camera_block__actions__edit {
+    margin-right: 20px;
+}

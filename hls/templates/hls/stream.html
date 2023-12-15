@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            background-color: black;
+        }
+        body {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <div class="video-container">
+        <video id="video" autoplay="true" muted="muted" controls ></video>
+    </div>
+    <script>
+        var video = document.getElementById('video');
+        if(Hls.isSupported()) {
+            var hls = new Hls();
+            hls.loadSource("http://{{ domain }}/hls/{{ uuid }}/");
+            hls.attachMedia(video);
+            hls.on(Hls.Events.MANIFEST_PARSED,function() {
+                video.play();
+            });
+        }
+        let hidden;
+        let visibilityChange; 
+        if (typeof document.hidden !== "undefined") {
+            hidden = "hidden";
+            visibilityChange = "visibilitychange";
+        } else if (typeof document.msHidden !== "undefined") {
+            hidden = "msHidden";
+            visibilityChange = "msvisibilitychange";
+        } else if (typeof document.webkitHidden !== "undefined") {
+            hidden = "webkitHidden";
+            visibilityChange = "webkitvisibilitychange";
+        }
+        document.addEventListener(visibilityChange, handleVisibilityChange, false);
+        function handleVisibilityChange(event) {
+            if (document[hidden]) {
+            } else {
+                if (video) {
+                    video.currentTime = 0;
+                }
+            }
+        }
+    </script>
+</body>
+</html>

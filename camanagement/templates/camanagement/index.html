@@ -1,0 +1,45 @@
+{% extends 'camanagement/base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'vendor/css/index_.css' %}">
+{% endblock %}
+
+{% block content %}
+    <main>
+        <div class="container">
+            <div class="row row-cols-lg-5">
+                <div class="col">
+                    <div class="main__service_block">
+                        <div class="main__service_block__img">
+                            <img src="{% static 'vendor/img/screen.png' %}" alt="screen" width="128">
+                        </div>
+                        <div class="main__service__link">
+                            <a href="{% url 'camanagement:add_cam' %}" class="btn btn-primary">Add Camera</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="main__service_block">
+                        <div class="main__service_block__img">
+                            <img src="{% static 'vendor/img/list.png' %}" alt="screen" width="128">
+                        </div>
+                        <div class="main__service__link">
+                            <a href="#" class="btn btn-primary">See Cameras</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="main__service_block">
+                        <div class="main__service_block__img">
+                            <img src="{% static 'vendor/img/stream.png' %}" alt="screen" width="128">
+                        </div>
+                        <div class="main__service__link">
+                            <a href="{% url 'camanagement:launch_hls' %}" class="btn btn-primary">Launch HLS</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
