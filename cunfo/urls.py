@@ -24,5 +24,6 @@ urlpatterns = [
     path('', ip_filter(index), name='index'),
     path('users/', include('users.urls', namespace='users')),
     path('manage/', include('camanagement.urls', namespace='camanagement')),
-    path('hls/', include('hls.urls', namespace='hls'))
+    path('hls/', include('hls.urls', namespace='hls')),
+    path('record/', include('record.urls', namespace='record'))
 ]

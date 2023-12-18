@@ -3,8 +3,20 @@ from .models import Camera
 
 
 class CameraForm(forms.Form):
-    name = forms.CharField(max_length=1000)
-    rtsp_url = forms.CharField(widget=forms.URLInput)
+    name = forms.CharField(max_length=1000, widget=forms.TextInput(
+        attrs={
+            'placeholder': 'Enter name of camera',
+            'class': 'form-select mb-3',
+            'aria-label': 'Name'
+        }
+    ))
+    rtsp_url = forms.CharField(widget=forms.URLInput(
+        attrs={
+            'placeholder': 'Enter rtsp url of camera',
+            'class': 'form-select mb-3',
+            'aria-label': 'RTSP URL'
+        }
+    ))
 
 
 class HLSForm(forms.Form):

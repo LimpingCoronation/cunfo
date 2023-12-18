@@ -61,7 +61,7 @@ def launch_record(request):
             cam = cam.first()
             record = RTSPRecording.objects.create(duration=request.POST['duration'], camera=cam)
             record.save()
-            Thread(target=rtsp_record, args=(record,), daemon=True).start()
+            rtsp_record(record)
             return HttpResponseRedirect(reverse('index'))
         else:
            return render(request, 'camanagement/launch_record.html', context={'form': RecordForm()})
