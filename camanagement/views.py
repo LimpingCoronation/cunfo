@@ -5,18 +5,18 @@ from django.contrib.auth.decorators import login_required
 from uuid import uuid4
 from .forms import CameraForm, HLSForm, RecordForm
 from .models import Camera, HLSTranslation, RTSPRecording
-from threading import Thread
 
 from common.ffmpeg_translation import create_ffmpeg_translation
 from common.ffmpeg_recording import rtsp_record
+from common.camera_filter import camera_exists
 
 # Create your views here.
-@login_required()
+@login_required
 def index(request):
     return render(request, "camanagement/index.html")
 
 
-@login_required()
+@login_required
 def add_cam(request):
     if request.method == "POST":
         form = CameraForm(request.POST)
@@ -31,12 +31,13 @@ def add_cam(request):
             return render(request, 'camanagement/add_cam.html', context={'form': CameraForm()})
     else:
         context = {
-            'form': CameraForm()
+            'form': CameraForm(),
+            'btn_label': 'Add',
         }
         return render(request, 'camanagement/add_cam.html', context=context)
     
 
-@login_required()
+@login_required
 def launch_hls(request):
     if request.method == "POST":
         cam = Camera.objects.filter(name=request.POST['name'])
@@ -52,7 +53,7 @@ def launch_hls(request):
         return render(request, 'camanagement/launch_hls.html', context={'form': HLSForm()})
     
 
-@login_required()
+@login_required
 def launch_record(request):
     if request.method == "POST":
         cam = Camera.objects.filter(name=request.POST['name'])
@@ -67,3 +68,35 @@ def launch_record(request):
            return render(request, 'camanagement/launch_record.html', context={'form': RecordForm()})
     else:
         return render(request, 'camanagement/launch_record.html', context={'form': RecordForm()})
+    
+
+@login_required
+def camera_list(request):
+    cameras = Camera.objects.all()
+    return render(request, 'camanagement/cameras_list.html', context={'cameras': cameras})
+
+
+@login_required
+@camera_exists
+def delete_camera(request, cam_uuid):
+    camera = Camera.objects.get(uuid=cam_uuid)
+    camera.delete()
+    return HttpResponseRedirect(reverse('camanagement:cameras_list'))
+
+
+@login_required
+@camera_exists
+def update_camera(request, cam_uuid):
+    cam = Camera.objects.get(uuid=cam_uuid)
+    if request.method == 'POST':
+        form = CameraForm(request.POST)
+        cam.name = form.data['name']
+        cam.rtsp_url = form.data['rtsp_url']
+        cam.save()
+        return HttpResponseRedirect(reverse('camanagement:cameras_list'))
+    else:
+        return render(request, 'camanagement/add_cam.html', context={
+            'form': CameraForm({'name': cam.name, 'rtsp_url': cam.rtsp_url}),
+            'uuid': cam.uuid,
+            'btn_label': 'Update',
+        })

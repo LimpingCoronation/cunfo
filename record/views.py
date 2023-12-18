@@ -1,9 +1,7 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render
 from django.conf import settings
 from django.http import FileResponse
-from pathlib import Path
 
-from camanagement.models import Camera
 from common.camera_filter import camera_exists
 
 # Create your views here.

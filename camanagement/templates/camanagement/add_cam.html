@@ -8,10 +8,14 @@
 {% block content %}
     <main class="main">
         <div class="main__block">
-            <form action="{% url 'camanagement:add_cam' %}" method="post">
+            <form method="post">
+                {% if uuid %}
+                    <label>UUID: </label>
+                    <input class="form-select mb-3" value="{{ uuid }}" disabled="disabled" type="text">
+                {% endif %}
                 {% csrf_token %}
                 {{ form }}
-                <button class="btn btn-primary" type="submit">Add</button>
+                <button class="btn btn-primary" type="submit">{{ btn_label }}</button>
             </form>
         </div>
     </main>
