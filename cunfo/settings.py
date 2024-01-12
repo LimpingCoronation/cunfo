@@ -29,6 +29,8 @@ ALLOWED_HOSTS = []
 DOMAIN_NAME = '127.0.0.1:8000'
 ALLOWED_IPS = ['127.0.0.1', '192.168.0.100', '93.157.251.250']
 
+LOGIN_URL = '/users/signin/'
+
 # Application definition
 
 INSTALLED_APPS = [

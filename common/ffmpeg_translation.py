@@ -15,6 +15,6 @@ def create_ffmpeg_translation(camera: Camera):
 
     cmd = get_ffmpeg_command(camera.rtsp_url, path_to_folder)
 
-    ffmpeg_stream = subprocess.Popen(cmd.split(' '), shell=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    ffmpeg_stream = subprocess.Popen(cmd.split(' '), shell=False, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
 
     return ffmpeg_stream.pid

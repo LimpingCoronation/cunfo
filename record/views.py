@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.conf import settings
 from django.http import FileResponse
+import os
 
 from common.camera_filter import camera_exists
 
@@ -8,7 +9,7 @@ from common.camera_filter import camera_exists
 @camera_exists
 def get_list_of_records(request, cam_uuid):
     archive_path = settings.RECORD_FOLDER / str(cam_uuid)
-    archive_files = list(map(lambda x: str(x).split('\\')[-1] ,list(archive_path.iterdir())))
+    archive_files = list(map(lambda x: str(x).split(os.sep)[-1] ,list(archive_path.iterdir())))
     return render(request, 'record/archive_list.html', {
         'archive_list': archive_files,
         'uuid': cam_uuid
