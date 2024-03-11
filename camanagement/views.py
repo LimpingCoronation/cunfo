@@ -81,14 +81,14 @@ def launch_record(request):
                 uuid=cam.uuid, 
                 duration=form.cleaned_data['duration'], 
                 rtsp_url=cam.rtsp_url, 
-                days=form.cleaned_data['days'],
+                days=int(form.cleaned_data['days']),
                 bitrate=form.cleaned_data['bitrate'],
                 quality=form.cleaned_data['quality'],
             )
             record = RTSPRecording.objects.create(
                 pid=record_proc, 
                 duration=form.cleaned_data['duration'], 
-                days=form.cleaned_data['days'], 
+                days=int(form.cleaned_data['days']), 
                 camera=cam, 
                 bitrate=form.cleaned_data['bitrate'],
                 quality=form.cleaned_data['quality'],
