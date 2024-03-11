@@ -11,7 +11,7 @@ def get_list_of_records(request, cam_uuid):
     archive_path = settings.RECORD_FOLDER / str(cam_uuid)
     archive_files = list(map(lambda x: str(x).split(os.sep)[-1] ,list(archive_path.iterdir())))
     return render(request, 'record/archive_list.html', {
-        'archive_list': archive_files,
+        'archive_list': sorted(archive_files)[::-1],
         'uuid': cam_uuid
     })
 

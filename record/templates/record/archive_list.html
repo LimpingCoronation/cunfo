@@ -1,15 +1,19 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Archive</title>
+    <link rel="stylesheet" href="{% static 'vendor/css/archive.css' %}">
 </head>
 <body>
+    <div class="archive_wrapper">
     {% for link in archive_list %}
-        <p>
-            <a href="{% url 'record:download_record' cam_uuid=uuid filename=link %}">{{ link }}</a>
-        </p>
+	    <div class="archive_block">
+                <a class="archive_link" href="{% url 'record:download_record' cam_uuid=uuid filename=link %}">{{ link }}</a>
+            </div>
     {% endfor %}
+    </div>
 </body>
 </html>

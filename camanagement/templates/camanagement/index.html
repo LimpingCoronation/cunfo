@@ -50,6 +50,17 @@
                     </div>
                 </div>
             </div>
+            <div class="col">
+                <div class="main__service_block">
+                    <div class="main__service_block__img">
+                        <img src="{% static 'vendor/img/control.png' %}" alt="screen" width="128">
+                    </div>
+                    <div class="main__service__link">
+                        <a href="{% url 'camanagement:proc_list' %}" class="btn btn-primary">Control procs</a>
+                    </div>
+                </div>
+            </div>
+        </div>
         </div>
     </main>
 {% endblock %}
