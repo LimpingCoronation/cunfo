@@ -27,13 +27,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False if (not os.environ.get('DEBUG') or os.environ.get('DEBUG') == 0) else True
+DEBUG = False if (not os.environ.get('DEBUG') or int(os.environ.get('DEBUG')) == 0) else True
 
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split(' ')
 DOMAIN_NAME = os.environ.get('DOMAIN_NAME')
 ALLOWED_IPS = os.environ.get('ALLOWED_IPS').split(' ')
 
-USE_POSTGRES = False if (not os.environ.get('USE_POSTGRES') or os.environ.get('USE_POSTGRES') == 0) else True
+USE_POSTGRES = False if (not os.environ.get('USE_POSTGRES') or int(os.environ.get('USE_POSTGRES')) == 0) else True
 DB_NAME = os.environ.get('DB_NAME')
 DB_USER = os.environ.get('DB_USER')
 DB_PASSWORD = os.environ.get('DB_PASSWORD')
@@ -160,8 +160,8 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # HLS and Record
-RECORD_FOLDER = BASE_DIR / 'cameras_record' # Path('/media') / 'hard' / 'cameras_record'
-HLS_FOLDER = BASE_DIR / 'hls_stream' # Path('/media') / 'hard' / 'hls_stream'
+RECORD_FOLDER = Path(os.environ.get('RECORD_FOLDER'))
+HLS_FOLDER = Path(os.environ.get('HLS_FOLDER'))
 
 # CORS
 CORS_ALLOW_ALL_ORIGINS = True
